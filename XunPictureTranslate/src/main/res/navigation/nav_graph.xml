@@ -9,5 +9,21 @@
         android:id="@+id/mainFragment"
         android:name="com.xxun.watch.picture_translate.fragment.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_translateResultFragment"
+            app:destination="@id/translateResultFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="Data"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/translateResultFragment"
+        android:name="com.xxun.watch.picture_translate.fragment.TranslateResultFragment"
+        android:label="fragment_translate_result"
+        tools:layout="@layout/fragment_translate_result" />
 </navigation>

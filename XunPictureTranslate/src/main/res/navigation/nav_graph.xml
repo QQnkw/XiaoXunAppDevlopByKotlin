@@ -10,20 +10,33 @@
         android:name="com.xxun.watch.picture_translate.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
+        <argument
+            android:name="Data"
+            app:argType="string" />
         <action
-            android:id="@+id/action_mainFragment_to_translateResultFragment"
-            app:destination="@id/translateResultFragment"
+            android:id="@+id/action_mainFragment_to_photoPreviewFragment"
+            app:destination="@id/photoPreviewFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <argument
-            android:name="Data"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/translateResultFragment"
         android:name="com.xxun.watch.picture_translate.fragment.TranslateResultFragment"
         android:label="fragment_translate_result"
         tools:layout="@layout/fragment_translate_result" />
+    <fragment
+        android:id="@+id/photoPreviewFragment"
+        android:name="com.xxun.watch.picture_translate.PhotoPreviewFragment"
+        android:label="fragment_photo_preview"
+        tools:layout="@layout/fragment_photo_preview">
+        <action
+            android:id="@+id/action_photoPreviewFragment_to_translateResultFragment"
+            app:destination="@id/translateResultFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 </navigation>

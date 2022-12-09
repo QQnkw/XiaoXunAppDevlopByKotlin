@@ -2,10 +2,12 @@ package com.xxun.watch.picture_translate.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.xxun.watch.picture_translate.R
 import com.xxun.watch.picture_translate.databinding.FragmentMainBinding
 import com.xxun.watch.picture_translate.databinding.FragmentTranslateResultBinding
@@ -31,7 +33,6 @@ class TranslateResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[TranslateResultViewModel::class.java]
-
     }
 
     override fun onDestroyView() {

@@ -10,9 +10,6 @@
         android:name="com.xxun.watch.picture_translate.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
-        <argument
-            android:name="Data"
-            app:argType="string" />
         <action
             android:id="@+id/action_mainFragment_to_photoPreviewFragment"
             app:destination="@id/photoPreviewFragment"
@@ -28,7 +25,7 @@
         tools:layout="@layout/fragment_translate_result" />
     <fragment
         android:id="@+id/photoPreviewFragment"
-        android:name="com.xxun.watch.picture_translate.PhotoPreviewFragment"
+        android:name="com.xxun.watch.picture_translate.fragment.PhotoPreviewFragment"
         android:label="fragment_photo_preview"
         tools:layout="@layout/fragment_photo_preview">
         <action

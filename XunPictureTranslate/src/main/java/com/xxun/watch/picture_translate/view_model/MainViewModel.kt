@@ -16,6 +16,8 @@ import java.io.File
 
 class MainViewModel : ViewModel() {
 
+    var path = ""
+
     @WorkerThread
     fun saveBitmapByteArrToFile(data: ByteArray?): Boolean {
         return data?.let {
@@ -25,7 +27,7 @@ class MainViewModel : ViewModel() {
                 })
             val imageByteArray = ImageUtils.bitmap2Bytes(bitmap)
             bitmap.recycle()
-            val path = createImagePath()
+            path = createImagePath()
             FileIOUtils.writeFileFromBytesByChannel(path, imageByteArray, true)
         } ?: false
     }
@@ -33,8 +35,7 @@ class MainViewModel : ViewModel() {
     @AnyThread
     fun createImagePath(): String {
         val appCachePath = PathUtils.getExternalAppCachePath()
-        val appName = AppUtils.getAppName()
         val currentThreadTimeMillis = SystemClock.currentThreadTimeMillis()
-        return appCachePath + File.separator + appName + currentThreadTimeMillis + ".jpg"
+        return appCachePath + File.separator + currentThreadTimeMillis + ".jpg"
     }
 }

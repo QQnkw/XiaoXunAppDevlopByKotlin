@@ -11,7 +11,7 @@ data class DataArray(
 )
 
 data class Word(
-    val conf: Double,
+    val conf: Float,
     val content: String,
     val coord: List<Coord>
 )

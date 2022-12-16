@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.annotation.NonNull
 import com.blankj.utilcode.util.LogUtils
-import com.xiao_xun.lib.text_voice_utils.JsonCallback
-import com.xiao_xun.lib.text_voice_utils.OkHttp3NetUtils
 import com.xxun.watch.picture_translate.bean.IdentityPictureResponse
 import com.xxun.watch.picture_translate.bean.TextTranslateResponse
+import com.xxun.watch.picture_translate.camera.JsonCallback
+import com.xxun.watch.picture_translate.camera.OkHttp3NetUtils
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.Call
@@ -22,11 +22,11 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class NetRepository {
-    suspend fun identityPicture(@NonNull base64: String): IdentityPictureResponse? {
+    suspend fun identityPicture(@NonNull base64: String): Any? {
         return suspendCoroutine { continuation ->
             OkHttp3NetUtils.getInstance()
-                .imageIdentifyToText(base64, "123456", object : JsonCallback<IdentityPictureResponse>() {
-                    override fun onSuccess(p0: IdentityPictureResponse?) {
+                .imageIdentifyToText(base64, "123456", object : JsonCallback<String>() {
+                    override fun onSuccess(p0: String?) {
                         continuation.resume(p0)
                     }
 
@@ -47,7 +47,7 @@ class NetRepository {
         @NonNull sourceLanguage: String,
         @NonNull targetLanguage: String,
         @NonNull text: String
-    ): TextTranslateResponse? {
+    ): Any? {
         return suspendCoroutine { continuation ->
             OkHttp3NetUtils.getInstance()
                 .textTranslate("", "", "", "123456", object : JsonCallback<TextTranslateResponse>() {

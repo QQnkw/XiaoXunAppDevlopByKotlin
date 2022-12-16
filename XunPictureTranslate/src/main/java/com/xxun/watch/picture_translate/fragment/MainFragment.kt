@@ -68,7 +68,7 @@ class MainFragment : Fragment() {
                         withContext(Dispatchers.Main) {
                             findNavController().navigate(R.id.action_mainFragment_to_photoPreviewFragment,
                                 bundleOf().apply {
-                                    putString("ImagePath", viewModel.createImagePath())
+                                    putString("ImagePath", viewModel.path)
                                 })
                         }
                     }

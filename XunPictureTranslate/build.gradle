@@ -59,6 +59,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
     implementation "com.squareup.okio:okio:$okio_version"
     implementation "androidx.multidex:multidex:$multidex_version"
+    implementation "com.google.code.gson:gson:$gson_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$test_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_core_version"

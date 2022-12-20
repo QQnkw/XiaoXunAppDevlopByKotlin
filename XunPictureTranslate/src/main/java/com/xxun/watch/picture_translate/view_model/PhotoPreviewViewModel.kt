@@ -1,6 +1,11 @@
 package com.xxun.watch.picture_translate.view_model
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.view.View
+import android.view.View.OnClickListener
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,6 +32,18 @@ class PhotoPreviewViewModel : ViewModel() {
     private fun picture2Base64(path: String): String {
         val imageByteArr = FileIOUtils.readFile2BytesByChannel(path)
         return EncodeUtils.base64Encode2String(imageByteArr)
+    }
+
+    fun createView(context: Context, viewGroup: FrameLayout, list: List<String>,onClickListener: OnClickListener){
+        list.forEachIndexed { index, s ->
+            val view = View(context)
+            val layoutParams = FrameLayout.LayoutParams(30, 30)
+            layoutParams.topMargin = 10
+            layoutParams.leftMargin = 10
+            view.tag = index
+            viewGroup.addView(view)
+            view.setOnClickListener(onClickListener)
+        }
     }
 
 }

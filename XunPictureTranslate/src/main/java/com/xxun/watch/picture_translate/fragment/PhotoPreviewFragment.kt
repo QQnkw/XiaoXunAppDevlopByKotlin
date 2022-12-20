@@ -50,5 +50,9 @@ class PhotoPreviewFragment : Fragment() {
         binding.viewActionClosePreview.setOnClickListener {
             findNavController().popBackStack()
         }
+        viewModel.createView(requireContext(),binding.viewGroupClick, listOf()){
+            val index = it.tag
+
+        }
     }
 }

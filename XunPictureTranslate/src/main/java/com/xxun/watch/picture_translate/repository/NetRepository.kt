@@ -25,18 +25,13 @@ class NetRepository {
     suspend fun identityPicture(@NonNull base64: String): Any? {
         return suspendCoroutine { continuation ->
             OkHttp3NetUtils.getInstance()
-                .imageIdentifyToText(base64, "123456", object : JsonCallback<String>() {
-                    override fun onSuccess(p0: String?) {
+                .imageIdentifyToText(base64, "123456", object : JsonCallback<IdentityPictureResponse>() {
+                    override fun onSuccess(p0: IdentityPictureResponse?) {
                         continuation.resume(p0)
                     }
 
                     override fun onError(exception: Exception?) {
                         super.onError(exception)
-                        continuation.resume(null)
-                    }
-
-                    override fun onFailure(call: Call, e: IOException) {
-                        super.onFailure(call, e)
                         continuation.resume(null)
                     }
                 })
@@ -57,11 +52,6 @@ class NetRepository {
 
                     override fun onError(exception: Exception?) {
                         super.onError(exception)
-                        continuation.resume(null)
-                    }
-
-                    override fun onFailure(call: Call, e: IOException) {
-                        super.onFailure(call, e)
                         continuation.resume(null)
                     }
                 })

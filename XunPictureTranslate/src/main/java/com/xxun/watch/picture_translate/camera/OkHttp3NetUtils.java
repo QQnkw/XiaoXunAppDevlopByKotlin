@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.HashMap;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class OkHttp3NetUtils {
     private OkHttpClient mOkHttpClient;
@@ -62,7 +66,21 @@ public class OkHttp3NetUtils {
                 .post(requestBody)
                 .build();
         mOkHttpClient.newCall(request)
-                .enqueue(callBack);
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        if (callBack!=null) {
+                            callBack.onError(e);
+                        }
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (callBack!=null) {
+                            callBack.convertResponse(mGson,response);
+                        }
+                    }
+                });
     }
 
     /**
@@ -86,7 +104,21 @@ public class OkHttp3NetUtils {
                 .post(requestBody)
                 .build();
         mOkHttpClient.newCall(request)
-                .enqueue(callBack);
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        if (callBack!=null) {
+                            callBack.onError(e);
+                        }
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (callBack!=null) {
+                            callBack.convertResponse(mGson,response);
+                        }
+                    }
+                });
 
     }
 

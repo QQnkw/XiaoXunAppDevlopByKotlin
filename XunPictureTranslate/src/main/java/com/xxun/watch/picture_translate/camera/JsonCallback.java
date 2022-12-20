@@ -3,6 +3,7 @@ package com.xxun.watch.picture_translate.camera;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.xxun.watch.picture_translate.bean.IdentityPictureResponse;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -14,16 +15,11 @@ import okhttp3.Callback;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public abstract class JsonCallback<T> implements Callback {
+public abstract class JsonCallback<T> {
     private final String TAG = "JsonCallback";
-    private Gson mGson;
-
-    public JsonCallback() {
-        mGson = new Gson();
-    }
 
     /**
-     * 处理数据时发生的错误
+     * 发生的错误
      *
      * @param exception 异常
      */
@@ -39,7 +35,7 @@ public abstract class JsonCallback<T> implements Callback {
     public abstract void onSuccess(T t);
 
 
-    private void convertResponse(Gson gson, Response response) {
+    public final void convertResponse(Gson gson, Response response) {
         try {
             Type genType = getClass().getGenericSuperclass();
             Type type = ((ParameterizedType) genType).getActualTypeArguments()[0];
@@ -50,25 +46,5 @@ public abstract class JsonCallback<T> implements Callback {
         } catch (Exception e) {
             onError(e);
         }
-    }
-
-    /**
-     * okhttp原始错误
-     */
-    @Override
-    public void onFailure(Call call, IOException e) {
-        Log.e(TAG, "onFailure", e);
-    }
-
-    /**
-     * okhttp原始成功回调
-     */
-    @Override
-    public void onResponse(Call call, Response response) throws IOException {
-//        convertResponse(mGson, response);
-        ResponseBody responseBody = response.body();
-        Reader reader = responseBody.charStream();
-        String t = mGson.fromJson(reader, String.class);
-        Log.d("NKW",t);
     }
 }

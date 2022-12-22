@@ -41,7 +41,7 @@ public class OkHttp3NetUtils {
 
     /**
      * 在线翻译
-     *
+     * 主线程
      * @param sourceLanguage 源语种
      * @param targetLanguage 目标语种
      * @param text           文本数据，UTF-8字符集，base64编码. 要求编码后大小不超过 1024 bytes（约256个汉字）。注: base64编码后大小会增加约1/3。
@@ -85,7 +85,7 @@ public class OkHttp3NetUtils {
 
     /**
      * 图像识别
-     *
+     * 主线程
      * @param image64  图像数据，需保证图像文件大小base64编码后不超过4MB
      * @param sid      手表登录后32位token
      * @param callBack 回调

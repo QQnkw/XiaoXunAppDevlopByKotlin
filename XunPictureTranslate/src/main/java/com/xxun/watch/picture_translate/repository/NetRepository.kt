@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.annotation.MainThread
 import androidx.annotation.NonNull
 import com.blankj.utilcode.util.LogUtils
 import com.xxun.watch.picture_translate.bean.IdentityPictureResponse
@@ -22,37 +23,38 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class NetRepository {
-    suspend fun identityPicture(@NonNull base64: String): Any? {
-        return suspendCoroutine { continuation ->
+    @MainThread
+    suspend fun identityPicture(@NonNull base64: String): IdentityPictureResponse {
+        return suspendCancellableCoroutine { continuation ->
             OkHttp3NetUtils.getInstance()
                 .imageIdentifyToText(base64, "123456", object : JsonCallback<IdentityPictureResponse>() {
-                    override fun onSuccess(p0: IdentityPictureResponse?) {
+                    override fun onSuccess(p0: IdentityPictureResponse) {
                         continuation.resume(p0)
                     }
 
-                    override fun onError(exception: Exception?) {
+                    override fun onError(exception: Exception) {
                         super.onError(exception)
-                        continuation.resume(null)
+                        continuation.resumeWithException(exception)
                     }
                 })
         }
     }
-
+    @MainThread
     suspend fun textTranslate(
         @NonNull sourceLanguage: String,
         @NonNull targetLanguage: String,
         @NonNull text: String
     ): Any? {
-        return suspendCoroutine { continuation ->
+        return suspendCancellableCoroutine { continuation ->
             OkHttp3NetUtils.getInstance()
                 .textTranslate("", "", "", "123456", object : JsonCallback<TextTranslateResponse>() {
-                    override fun onSuccess(p0: TextTranslateResponse?) {
+                    override fun onSuccess(p0: TextTranslateResponse) {
                         continuation.resume(p0)
                     }
 
-                    override fun onError(exception: Exception?) {
+                    override fun onError(exception: Exception) {
                         super.onError(exception)
-                        continuation.resume(null)
+                        continuation.resumeWithException(exception)
                     }
                 })
         }

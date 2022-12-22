@@ -25,6 +25,7 @@ class MainViewModel : ViewModel() {
                 BitmapFactory.decodeByteArray(it, 0, it.size, BitmapFactory.Options().apply {
                     inSampleSize = 4
                 })
+            LogUtils.d("${bitmap.width}---${bitmap.height}")
             val imageByteArray = ImageUtils.bitmap2Bytes(bitmap)
             bitmap.recycle()
             path = createImagePath()

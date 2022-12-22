@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2e3c4a"
     tools:context=".fragment.PhotoPreviewFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.xxun.watch.picture_translate.weight.TextScopeImageView
+        android:background="#00fff0"
         android:id="@+id/view_image_show_photo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

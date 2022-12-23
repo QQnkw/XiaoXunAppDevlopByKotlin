@@ -10,12 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ToastUtils
 import com.xxun.watch.picture_translate.R
 import com.xxun.watch.picture_translate.adapter.TranslateResultAdapter
+import com.xxun.watch.picture_translate.audio.MpListUtils
+import com.xxun.watch.picture_translate.audio.VoicePlayTool
 import com.xxun.watch.picture_translate.databinding.FragmentMainBinding
 import com.xxun.watch.picture_translate.databinding.FragmentTranslateResultBinding
 import com.xxun.watch.picture_translate.view_model.TranslateResultViewModel
@@ -26,6 +30,7 @@ class TranslateResultFragment : Fragment() {
     private lateinit var viewModel: TranslateResultViewModel
     private var _binding: FragmentTranslateResultBinding? = null
     private val binding get() = _binding!!
+    private val voicePlayTool = VoicePlayTool()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +43,7 @@ class TranslateResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[TranslateResultViewModel::class.java]
-
+        viewLifecycleOwner.lifecycle.addObserver(voicePlayTool)
         arguments?.let { bundle ->
             text = bundle.getString("text")
             text?.let { str ->
@@ -69,6 +74,7 @@ class TranslateResultFragment : Fragment() {
                 return@Observer
             }
             binding.listView.apply {
+                voicePlayTool.pauseVoice()
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = TranslateResultAdapter(listOf(it)) { voice, text ->
                     if (!TextUtils.isEmpty(text)) {
@@ -78,13 +84,13 @@ class TranslateResultFragment : Fragment() {
 
                     if (!TextUtils.isEmpty(voice)) {
                         ToastUtils.showLong(voice)
+                        voicePlayTool.setData("http://dtznpic.oss-cn-shenzhen.aliyuncs.com/audio/0-1514450638120크러쉬 (Crush) - 잠 못드는 밤 (铃声).mp3")
                         return@TranslateResultAdapter
                     }
 
                 }
             }
         })
-
     }
 
     override fun onDestroyView() {

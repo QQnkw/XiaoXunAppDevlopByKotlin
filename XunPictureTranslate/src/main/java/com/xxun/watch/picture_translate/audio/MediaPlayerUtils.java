@@ -62,11 +62,15 @@ public class MediaPlayerUtils implements Runnable, MediaPlayer.OnErrorListener, 
      */
     public void setData(@NonNull String url, @NonNull int streamType) {
         try {
+            if (mediaPlayer!=null) {
+                stop();
+            }
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setDataSource(EncodeUtils.toUrlEncode(url));
             mediaPlayer.setAudioStreamType(streamType);
             mediaPlayer.prepareAsync();
             isPrepare = false;
+            onlyAutoStartPlay = true;
             mediaPlayer.setOnPreparedListener(this);
             mediaPlayer.setOnSeekCompleteListener(this);
             mediaPlayer.setOnCompletionListener(this);

@@ -29,7 +29,7 @@ class TranslateResultAdapter(val list: List<TransResult>, val listener: (String,
             listener("", it)
         }
         holder.binding.viewActionPlayVoice.setOnClickListener {
-            ToastUtils.showLong("播放音乐")
+            listener("播放音乐","")
         }
     }
 

@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_rect_solit_gray_1d1d1d_corner_6"
+    android:padding="10dp">
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/view_action_play_voice"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="#2e3d4c"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#3d4c9c"
+        app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.15" />
 
     <com.xxun.watch.picture_translate.weight.SelectWordTextView
         android:id="@+id/view_action_source_txt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="my word is key"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/gray_666666"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/view_action_play_voice"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="my word is key" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="view_action_play_voice,view_action_source_txt" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray_2a2a2a"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier_bottom" />
 
     <com.xxun.watch.picture_translate.weight.SelectWordTextView
         android:id="@+id/view_action_target_txt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="我是一个好人"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@id/view_action_source_txt"
         app:layout_constraintStart_toStartOf="@id/view_action_source_txt"
-        app:layout_constraintTop_toBottomOf="@id/view_action_source_txt" />
+        app:layout_constraintTop_toBottomOf="@id/view_line"
+        tools:text="我是一个好人" />
 </androidx.constraintlayout.widget.ConstraintLayout>

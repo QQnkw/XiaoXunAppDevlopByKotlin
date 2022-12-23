@@ -44,10 +44,10 @@ class NetRepository {
         @NonNull sourceLanguage: String,
         @NonNull targetLanguage: String,
         @NonNull text: String
-    ): Any? {
+    ): TextTranslateResponse {
         return suspendCancellableCoroutine { continuation ->
             OkHttp3NetUtils.getInstance()
-                .textTranslate("", "", "", "123456", object : JsonCallback<TextTranslateResponse>() {
+                .textTranslate(sourceLanguage, targetLanguage, text, "123456", object : JsonCallback<TextTranslateResponse>() {
                     override fun onSuccess(p0: TextTranslateResponse) {
                         continuation.resume(p0)
                     }

@@ -2,6 +2,7 @@ package com.xxun.watch.picture_translate.view_model
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.RectF
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
@@ -22,7 +23,8 @@ import kotlinx.coroutines.withContext
 
 class PhotoPreviewViewModel : ViewModel() {
     private val netRepository = NetRepository()
-    val textInfoLiveData = MutableLiveData<List<Word>>()
+    val textInfoLiveData = MutableLiveData<List<List<Pair<Int, Int>>>>()
+    private val textList = mutableListOf<String>()
     fun identityPicture(path: String) {
         viewModelScope.launch(Dispatchers.IO) {
             // TODO: 需要判断文件大小
@@ -30,11 +32,17 @@ class PhotoPreviewViewModel : ViewModel() {
             withContext(Dispatchers.Main) {
                 try {
                     val bean = netRepository.identityPicture(base64)
-                    val textList = mutableListOf<Word>()
-                    bean.datajs.words.forEach {
-                        textList.add(it)
+                    val allRectPointList = mutableListOf<List<Pair<Int, Int>>>()
+                    textList.clear()
+                    bean.datajs.words.forEachIndexed { index, word ->
+                        val rectPointList = mutableListOf<Pair<Int, Int>>()
+                        word.coord.forEach {
+                            rectPointList.add(Pair(it.x, it.y))
+                        }
+                        textList.add(word.content)
+                        allRectPointList.add(rectPointList)
                     }
-                    textInfoLiveData.value = textList
+                    textInfoLiveData.value = allRectPointList
                 } catch (e: Exception) {
                     textInfoLiveData.value = listOf()
                     LogUtils.e(e)
@@ -48,4 +56,6 @@ class PhotoPreviewViewModel : ViewModel() {
         val imageByteArr = FileIOUtils.readFile2BytesByChannel(path)
         return EncodeUtils.base64Encode2String(imageByteArr)
     }
+
+    fun getClickText(index: Int) = textList[index]
 }

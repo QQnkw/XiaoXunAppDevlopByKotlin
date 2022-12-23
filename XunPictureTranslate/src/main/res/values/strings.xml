@@ -2,4 +2,8 @@
     <string name="app_name">拍照识图</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="english_code">英</string>
+    <string name="chinese_code">中</string>
+    <string name="go_translate">继续翻译</string>
+    <string name="take_photo_notice">平行于参考线拍摄</string>
 </resources>

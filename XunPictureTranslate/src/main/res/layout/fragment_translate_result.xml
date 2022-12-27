@@ -70,7 +70,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/shape_rect_solid_blue_6996ff_corner_6"
+        android:background="@drawable/selector_rect_corner_6_pressed_solid_5478cc_normal_6996ff"
         android:text="@string/go_translate"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -79,6 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.9" />
+
     <ProgressBar
         android:id="@+id/view_loading"
         android:layout_width="0dp"
